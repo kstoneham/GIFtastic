@@ -1,7 +1,16 @@
 $(document).ready(function(){
-    // $("#search-btn").submit(function(e){
-    //     return false;
-    // });
+
+        $(window).keydown(function(event){
+          if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+          }
+        });
+
+
+
+
+
 // This app takes a string input to create buttons at the same time as 
 // interface with the GIPHY search API and return 10 static GIFs.
 // Upon user click, the GIF will animate, click again to stop.
@@ -31,12 +40,18 @@ $("#form").click(function(event){
     event.preventDefault();
     // stores the string value in a variable userSearch
     var userSearch = $("#gif-search").val().trim();
+    var gifSearch = $("#gif-search").val();
+    if (gifSearch === ""){
+        return;
+    } else {
     // pushes the string to the topics array
     topics.push(userSearch);
     // renders the new search button in the div
     renderButtons();
     console.log(userSearch);
     console.log(topics);
+        
+    }
 });
 // DONE: Get GIFs
 $(document).on("click","button", function(){
