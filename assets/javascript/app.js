@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $("#search-btn").submit(function(e){
-        return false;
-    });
+    // $("#search-btn").submit(function(e){
+    //     return false;
+    // });
 // This app takes a string input to create buttons at the same time as 
 // interface with the GIPHY search API and return 10 static GIFs.
 // Upon user click, the GIF will animate, click again to stop.
@@ -27,7 +27,7 @@ renderButtons();
 // MAIN PROCESS
 // --------------------------
 // DONE: Add search term to #buttons div--with guard statement
-$("#search-btn").on("click", function(event){
+$("#form").click(function(event){
     event.preventDefault();
     // stores the string value in a variable userSearch
     var userSearch = $("#gif-search").val().trim();
@@ -60,14 +60,16 @@ $(document).on("click","button", function(){
         // loop through each result 
         for (var i = 0; i < results.length; i++){
             var moviediv = $("<div>");
-            // TODO: create paragraph with item rating
+            moviediv.attr("style", "text-align: center;")
+            // create variable for paragraph with item rating
+            var description = $("<p>Rating: " + results[i].rating + "</p>");
             // creating image tags for GIFs
             var movieImage = $("<img>");
             // set the src of the image to the url pulled from the JSON in the console; it was put there by the AJAX call
             movieImage.attr("src", results[i].images.fixed_height_still.url);
             movieImage.attr("still", results[i].images.fixed_height_still.url)
             movieImage.attr("animate", results[i].images.fixed_height.url)
-            moviediv.prepend(movieImage);
+            moviediv.prepend(movieImage, description);
             // append GIFs to page
             $("#gif-bin").prepend(moviediv);
         }
